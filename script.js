@@ -98,8 +98,10 @@ let labels = document.querySelectorAll(".answerLabel");
 let inputButtons = document.querySelectorAll(".inputButtons");
 let questionNumber = 0;
 let answersArray = [];
+let printedQuestion = document.createElement("span");
 
 function printAnswers(questionIndex) {
+ 
   let currentQuestion = questions[questionIndex];
   answersArray = [
     currentQuestion.correct_answer,
@@ -116,7 +118,6 @@ function printAnswers(questionIndex) {
     }
   });
  
-  let printedQuestion = document.createElement("span");
   printedQuestion.textContent =currentQuestion.question;
   printedQuestion.classList.add("printedQuestion")
   
@@ -134,13 +135,13 @@ inputButtons.forEach((inputButton, index) => {
         printAnswers(questionNumber);
       } 
       if (answersArray.length <= 2) {
-        
+        // Disabilita e nasconde check3 e check4
         document.getElementById("check3").setAttribute("disabled", "disabled");
         document.getElementById("check4").setAttribute("disabled", "disabled");
         document.getElementById("button3").classList.add("hiddenInput");
         document.getElementById("button4").classList.add("hiddenInput");
       } else {
-        
+        // Assicura che check3 e check4 siano abilitati e visibili
         document.getElementById("check3").removeAttribute("disabled");
         document.getElementById("check4").removeAttribute("disabled");
         document.getElementById("button3").classList.remove("hiddenInput");
@@ -151,3 +152,87 @@ inputButtons.forEach((inputButton, index) => {
   });
 });
 
+/*questions.forEach((question) => {
+newCorrectAnswers.push(question.correct_answer);
+newIncorrectAnswers.push(question.incorrect_answers.join());
+})
+console.log(newCorrectAnswers);
+console.log(newIncorrectAnswers)
+
+
+
+newCorrectAnswers.forEach((newCorrectAnswer) => {
+labels.forEach((label) => {
+label.textContent = newCorrectAnswer;
+
+}) 
+})
+
+
+
+function printAnswers() {
+
+arrayAnswers = questions[questionNumber].incorrect_answers;
+
+
+for(let i = 0; i < questions[questionNumber].incorrect_answers.length; i++){
+answers = questions[questionNumber].incorrect_answers[i];
+}
+
+
+    labels.forEach((label) => {
+      for(let i = 0; i < arrayAnswers.length; i++) {
+        answers = arrayAnswers[i];
+        label.textContent = answers;
+      }
+    
+  })
+
+
+
+
+
+
+
+
+}
+
+inputButtons.forEach((inputButton) => {
+inputButton.addEventListener("change", function(){
+if(inputButton.checked) {
+  questionNumber++;
+  printAnswers();
+}
+})
+})
+
+
+
+
+
+
+
+
+
+
+
+/*let answersArray = [];
+answersArray = questions.flatMap((question) => 
+  [question.correct_answer, ...question.incorrect_answers]
+);
+
+
+console.log(answersArray);
+
+function shuffleArray(array) {
+for(let i = array.length - 1; i > 0; i--){
+  const j = Math.floor(Math.random() * (i+1));
+  const temp = array[i];
+  array[i] = array[j];
+  array[j] = temp;
+}
+ return array
+}
+
+let shuffledArray = shuffleArray(answersArray);
+*/
